@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Tuser implements java.io.Serializable {
 
     /**
-     *
+     *用户表
      */
     private static final long serialVersionUID = 1L;
 

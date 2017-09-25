@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class TuserController {
     TuserService tuserService;
 
     @ApiOperation(value = "获得用户", notes = "齐文帅")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/user/getTuserById/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public BeanResult getUserById(@ApiParam(required = true, name = "id", value = "用户信息", defaultValue = "2")
                                   @PathVariable("id") Long id) {
@@ -36,10 +38,9 @@ public class TuserController {
             Tuser tuser = tuserService.findTuserById(id);
             logger.info("测试log4j");
             logger.error("测试log4j2");
-            logger.info(ConfigUtil.getConfig("ceshi"));
             result = BeanResult.success(tuser);
         } catch (Exception e) {
-            logger.error("测试log4j1");
+            logger.error("错误"+e.getMessage());
             return null;
         }
         return result;
