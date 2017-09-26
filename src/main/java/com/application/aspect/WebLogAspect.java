@@ -53,7 +53,7 @@ public class WebLogAspect {
     }
 
     @Around(value = "webLog()")
-    public void watchPerformance(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object watchPerformance(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.info("前置");
         //proceed程序返回值
         Object proceed = joinPoint.proceed();
@@ -67,6 +67,7 @@ public class WebLogAspect {
         }
         logger.info("后置around");
         logger.info(result);
+        return proceed;
     }
 
 

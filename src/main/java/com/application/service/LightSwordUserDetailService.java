@@ -33,6 +33,7 @@ public class LightSwordUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // 判断登录的逻辑
         Tuser tuser = new Tuser();
         tuser.setUserName(username);
         Example<Tuser> example = Example.of(tuser);
@@ -51,7 +52,7 @@ public class LightSwordUserDetailService implements UserDetailsService {
             if (!StringUtils.isEmpty(roleName)) {
                 simpleGrantedAuthorities.add(new SimpleGrantedAuthority(roleName));
             }
-            System.err.println("username is " + username + ", " + roleName);
+            System.out.println("username is " + username + ", " + roleName);
         }
         return new User(username, tuser1.getPassWord(), simpleGrantedAuthorities);
     }
