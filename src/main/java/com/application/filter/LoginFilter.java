@@ -28,14 +28,14 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpSession session = httpServletRequest.getSession();
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal.getClass().isInstance(String.class)) {
-            username = principal.toString();
-        } else {
-            username = ((UserDetails) principal).getUsername();
-        }
-
-        session.setAttribute("username", username);
-        System.out.println(session.getAttribute("username"));
+//        if (principal.getClass().isInstance(String.class)) {
+//            username = principal.toString();
+//        } else {
+//            username = ((UserDetails) principal).getUsername();
+//        }
+//
+//        session.setAttribute("username", username);
+//        System.out.println(session.getAttribute("username"));
         chain.doFilter(request, response);
     }
 

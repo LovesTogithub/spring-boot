@@ -29,7 +29,7 @@ public class TuserController {
     TuserService tuserService;
 
     @ApiOperation(value = "获得用户", notes = "齐文帅")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/user/getTuserById/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public BeanResult getUserById(@ApiParam(required = true, name = "id", value = "用户信息", defaultValue = "2")
                                   @PathVariable("id") Long id) {
