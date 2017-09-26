@@ -1,4 +1,4 @@
-package com.application.config;
+package com.application.common.config;
 
 import com.application.service.LightSwordUserDetailService;
 import org.springframework.context.annotation.Bean;

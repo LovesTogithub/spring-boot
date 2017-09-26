@@ -1,8 +1,7 @@
-package com.application;
+package com.application.common.config;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -12,9 +11,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Enumeration;
-import java.util.Map;
-import java.util.ResourceBundle;
+
 
 /**
  * Created by qws on 2017/9/17/017.
