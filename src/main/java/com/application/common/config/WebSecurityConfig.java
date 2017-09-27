@@ -1,6 +1,9 @@
 package com.application.common.config;
 
+import com.application.filter.ReqCache;
 import com.application.service.LightSwordUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -13,7 +16,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,20 +32,24 @@ import java.io.IOException;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Resource
+    private ReqCache requestCache;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //super.configure(http);
         http.csrf().disable().authorizeRequests()
                 .anyRequest().authenticated()
-                .and().formLogin()
-                .successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-//                        httpServletRequest.getRequestURI();
-//                        String refererUrl = httpServletRequest.getHeader("Referer");
-//                        httpServletResponse.sendRedirect(refererUrl);
-                    }
-                })
+                .and().formLogin().loginPage("/login")
+//                .successHandler(new AuthenticationSuccessHandler() {
+//            @Override
+//            public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+//                SavedRequest request = requestCache.getRequest(httpServletRequest, httpServletResponse);
+//                System.out.println(request.getRedirectUrl());
+//
+//            }
+//        })
                 .permitAll()
                 .and()
                 .logout()
@@ -59,6 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    自定义service
         auth.userDetailsService(userDetailsService()); // （6）
     }
+
 
 }
 
