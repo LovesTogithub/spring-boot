@@ -1,4 +1,4 @@
-package com.application.common.config;
+package com.application.common.security;
 
 import com.application.filter.ReqCache;
 import com.application.service.LightSwordUserDetailService;

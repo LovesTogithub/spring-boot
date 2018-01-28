@@ -1,10 +1,12 @@
 package com.application.controller;
 
 import com.application.util.BeanResult;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,7 @@ import java.security.Principal;
 @RequestMapping("/log-in")
 public class AdminLogin {
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public BeanResult index() {
         BeanResult result;
         String username;

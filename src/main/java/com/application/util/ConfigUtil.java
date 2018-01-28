@@ -15,16 +15,20 @@ import java.util.*;
  * Created by chengchao on 16-10-13.
  */
 @Component
-@Profile("dev")
 public class ConfigUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfigUtil.class);
 
     private static Map<String, String> config;
 
-    static {
+    @Value("${spring.profiles.active}")
+    private String version;
+
+
+    @PostConstruct
+    public void setConfig() {
         config = new HashMap<>();
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("application-dev");
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("application-" + version);
         Enumeration<String> keys = resourceBundle.getKeys();
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
