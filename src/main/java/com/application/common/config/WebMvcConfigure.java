@@ -2,6 +2,7 @@ package com.application.common.config;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,6 +22,9 @@ import java.net.URISyntaxException;
 public class WebMvcConfigure extends WebMvcConfigurerAdapter {
 
 
+    @Autowired
+    InterceptorConfig interceptorConfig;
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 
@@ -39,7 +43,7 @@ public class WebMvcConfigure extends WebMvcConfigurerAdapter {
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用户排除拦截
 
-        registry.addInterceptor( new InterceptorConfig().demoInterceptor());
+        registry.addInterceptor( interceptorConfig.demoInterceptor());
 
 
         super.addInterceptors(registry);
