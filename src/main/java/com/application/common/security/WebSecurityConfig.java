@@ -42,14 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
-//                .successHandler(new AuthenticationSuccessHandler() {
-//            @Override
-//            public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-//                SavedRequest request = requestCache.getRequest(httpServletRequest, httpServletResponse);
-//                System.out.println(request.getRedirectUrl());
-//
-//            }
-//        })
+                .successHandler((httpServletRequest, httpServletResponse, authentication) -> {
+                    SavedRequest request = requestCache.getRequest(httpServletRequest, httpServletResponse);
+                    System.out.println(request.getRedirectUrl());
+                    httpServletResponse.sendRedirect(request.getRedirectUrl());
+                })
                 .permitAll()
                 .and()
                 .logout()

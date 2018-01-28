@@ -4,6 +4,7 @@ package com.application.common.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -23,7 +24,7 @@ public class WebMvcConfigure extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 
-        registry.addViewController("/home").setViewName("home");
+        //registry.addViewController("/home").setViewName("home");
         registry.addViewController("/login").setViewName("login");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
@@ -31,18 +32,18 @@ public class WebMvcConfigure extends WebMvcConfigurerAdapter {
     }
 
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        // TODO Auto-generated method stub
-//        // 多个拦截器组成一个拦截器链
-//        // addPathPatterns 用于添加拦截规则
-//        // excludePathPatterns 用户排除拦截
-//
-//        registry.addInterceptor(new AuthInterceptor()).addPathPatterns("/**");
-//
-//
-//        super.addInterceptors(registry);
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // TODO Auto-generated method stub
+        // 多个拦截器组成一个拦截器链
+        // addPathPatterns 用于添加拦截规则
+        // excludePathPatterns 用户排除拦截
+
+        registry.addInterceptor( new InterceptorConfig().demoInterceptor());
+
+
+        super.addInterceptors(registry);
+    }
 
     /**
      * @param
